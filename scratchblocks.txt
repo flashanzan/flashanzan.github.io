@@ -1,0 +1,28 @@
+when @greenFlag clicked
+count down [3]::custom
+wait (0.5) seconds
+flash [10]::custom
+ask [Sum?] and wait
+if <(answer) = (correct answer)> then
+    say [Lovely!]
+else
+    say (join (join [Good effort but the answer is ] (correct answer)) [.])
+end
+
+define count down (number of times)
+set [count v] to (number of times::custom)
+repeat (number of times::custom)
+    start sound [Pop v]
+    say (count) for (1) seconds
+    change [count v] by (-1)
+end
+
+define flash (number of times)
+set [correct answer v] to [0]
+repeat (number of times::custom)
+    set [number v] to (pick random (1) to (9))
+    start sound [Pop v]
+    say (number) for (0.3) seconds
+    say [] for (0.2) seconds
+    change [correct answer v] by (number)
+end
